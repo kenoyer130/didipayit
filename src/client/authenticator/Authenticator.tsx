@@ -1,4 +1,5 @@
 import * as React from "react";
+import AuthenticatorPanel from "./AuthenticatorPanel"
 
 interface IAuthenticatorProps {
     hasAuthToken: boolean
@@ -11,7 +12,7 @@ class Authenticator extends React.Component<IAuthenticatorProps, IAuthenticatorS
         return <div>
                 {this.props.hasAuthToken ?
                     <span>{this.props.children}</span> : 
-                    <span>Not authenticated fool!</span>
+                    <span><AuthenticatorPanel /></span>
                 }</div>
     }
 }
