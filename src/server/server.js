@@ -14,7 +14,7 @@ var db;
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, database) {
     if(err) {
-        console.log(err);
+        console.log(err);      
         process.exit(1);
     }
 
@@ -33,7 +33,7 @@ function error(msg) {
 
 // routes
 
-app.get("/settings", function(req, res) {
+app.get("/api/settings", function(req, res) {
 
     console.log("starting request /settings");
 

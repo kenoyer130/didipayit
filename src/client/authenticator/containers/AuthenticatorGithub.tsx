@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-interface IAuthenticatorGithubProps {
+export interface IAuthenticatorGithubProps {
     githubClientId: string
 };
 
@@ -16,7 +16,7 @@ class AuthenticatorGithub extends React.Component<IAuthenticatorGithubProps, IAu
 
     _onclick() {
         const URL = "https://github.com/login/oauth/authorize?scope=user:email&client_id=" + this.props.githubClientId;
-        window.open(URL, "_github", "");        
+        window.open(URL, "_github", "hieght:150, width:400");        
     }    
 
     public render() {

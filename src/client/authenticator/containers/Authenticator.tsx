@@ -2,19 +2,20 @@ import * as React from "react";
 import AuthenticatorPanel from "./AuthenticatorPanel"
 import AuthenticatorSettings from "../types/AuthenticatorSettings"
 
-interface IAuthenticatorProps {
+export interface IAuthenticatorProps {
     hasAuthToken: boolean
-    authenticatorSettings: AuthenticatorSettings
+    authenticatorSettingsLoaded : boolean
 };
 
 interface IAuthenticatorState {};
 
 class Authenticator extends React.Component<IAuthenticatorProps, IAuthenticatorState> {
+
     public render() { 
         return <div>
                 {this.props.hasAuthToken ?
                     <span>{this.props.children}</span> : 
-                    this.props.authenticatorSettings ?
+                    this.props.authenticatorSettingsLoaded ?
                         <span><AuthenticatorPanel /></span> :
                         <span>loading...</span>
                 }</div>

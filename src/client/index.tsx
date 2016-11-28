@@ -7,10 +7,16 @@ import { DefaultState } from "./authenticator/AuthenticatorStore";
 import AuthenticatorReducer from "./authenticator/AuthenticatorReducer";
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import {fetchAuthenticatorSettings} from './authenticator/actions/AuthenticatorSettingsRequestAction'
+import {exec} from './authenticator/actions/FetchRequestAction'
 import AuthenticatorContainer from "./authenticator/containers/AuthenticatorContainer"; 
+import createLogger = require("redux-logger");
 
-const store = createStore( AuthenticatorReducer, applyMiddleware(thunkMiddleware));
+import authenticationSettingsResponse from './authenticator/actions/AuthenticatorSettingsResponseAction'
+import AuthenticatorSettings from "./authenticator/types/AuthenticatorSettings"
+
+let loggerMiddleware = createLogger()
+
+const store = createStore( AuthenticatorReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 ReactDOM.render (
     <Provider store={store}>
@@ -21,4 +27,4 @@ ReactDOM.render (
     document.getElementById("root")
 );
 
-store.dispatch(fetchAuthenticatorSettings);
+store.dispatch(exec("api/settings", authenticationSettingsResponse));

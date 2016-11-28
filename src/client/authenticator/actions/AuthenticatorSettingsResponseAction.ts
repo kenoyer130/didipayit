@@ -1,16 +1,21 @@
 import AuthenticatorSettings from "../types/AuthenticatorSettings"
 
-interface IAuthenticatorSettingsResponseAction extends Redux.Action {
+export const AUTHENTICATION_SETTINGS_RESPONSE = "AUTHENTICATION_SETTINGS_RESPONSE";
+
+export interface IAuthenticatorSettingsResponseAction extends Redux.Action {
     authenticatorSettings : AuthenticatorSettings
 }
 
-class AuthenticatorSettingsResponseAction implements IAuthenticatorSettingsResponseAction {
-     type = "AUTHENTICATION_SETTINGS_RESPONSE"
-     authenticatorSettings:AuthenticatorSettings = null;
+function authenticationSettingsResponse(response :any) : IAuthenticatorSettingsResponseAction {
 
-     constructor(authenticatorSettings : AuthenticatorSettings) {
-         this.authenticatorSettings = authenticatorSettings;
-     }
-} 
+    const authenticatorSettings : AuthenticatorSettings =  {
+        githubClientId : response['github_client_id']
+    };
 
-export default AuthenticatorSettingsResponseAction;
+    return {
+        type : AUTHENTICATION_SETTINGS_RESPONSE,
+        authenticatorSettings: authenticatorSettings
+    }
+}
+
+export default authenticationSettingsResponse;
