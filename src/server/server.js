@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require("body-parser");
+var request = require('request');
 
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
@@ -45,4 +46,23 @@ app.get("/api/settings", function(req, res) {
             res.status(200).json(docs[0]);
         }
     });
+});
+
+app.get("/api/github_authentication_callback", function(req, res) {
+    
+    var session_code = req.query.code;
+
+    request({
+        uri: 'https://github.com/login/oauth/access_token', 
+        method: "POST",
+        json: {
+          "client_id" :  process.env.GITHUB_CLIENT_ID,
+          "client_secret" : process.env.GITHUB_CLIENT_SECRET,
+          "code" : session_code, 
+        },
+        function(err, response, body) {
+            console.log(body);
+            var github_access_token = JSON.parse(body)["access_token"];
+        }
+    });            
 });
