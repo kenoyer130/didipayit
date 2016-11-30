@@ -4,6 +4,8 @@
   "description": "monthly bill tracker",
   "main": "index.tsx",
   "scripts": {
+    "postinstall": "webpack --config ./webpack.config.js --progress --colors",
+    "start": "node src/server/server.js",
     "dev": "webpack-dev-server --progress --color --watch --display-error-details --content-base dist/",
     "test": "jest"
   },
