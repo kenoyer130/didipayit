@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var request = require('request');
+var path = require('path')
 
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
@@ -9,7 +10,11 @@ var ACCOUNTS_COLLECTION = "accounts";
 var GLOBAL_SETTINGS_COLLECTION = "global_settings";
 
 var app = express();
-app.use(express.static(__dirname + "/dist"));
+var public_path = path.join(__dirname + "/../../dist");
+
+app.use(express.static(public_path));
+
+console.log("public files served from " + public_path);
 
 var db;
 
