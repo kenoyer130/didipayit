@@ -56,6 +56,10 @@ app.get("/api/settings", function(req, res) {
 app.get("/api/github_authentication_callback", function(req, res) {
     
     var session_code = req.query.code;
+    requestGithubToken(session_code, res);
+});
+
+function requestGithubToken(session_code, res) {
     var url = 'https://github.com/login/oauth/access_token';
     request.post({
         uri: url, 
@@ -69,22 +73,40 @@ app.get("/api/github_authentication_callback", function(req, res) {
 
             if(err) {
                 error(err.message)
-                res.status(500)
-                res.send('Error')
                 return;
             }
 
             var github_access_token = body["access_token"];
-
-            db.collection(ACCOUNTS_COLLECTION).insert(
-                {
-                    "authentication_type" : "github",
-                    "access_token" : github_access_token 
-                }
-            );
-
-             res.status('200')
-             res.send('Your account has has been created! Please close this window to continue');
+            requestGithubAuthentication(github_access_token, res);
         }
-    );            
-});
+    );
+}
+
+function requestGithubAuthentication(access_token, res) {
+    request.get({
+        uri: 'https://api.github.com/user/emails?access_token=' + access_token,
+        headers: {
+            'User-Agent' : 'didipayit'
+        }
+       },
+        function(err, response, body) {
+
+                if(err) {
+                    error(err.message)
+                    return;
+                }
+
+                var primaryEmail = JSON.parse(body)
+                .filter(function(accountEmail) {
+                    return accountEmail.primary == true;         
+                }).map(function(accountEmail) {
+                    return accountEmail.email;
+                })[0];
+                
+                var closeScript = '<scri';
+                closeScript += 'pt>opener.postMessage( { "action" : "github_authenticated", "email" : "' + primaryEmail + '", "access_token" : "' + access_token + '"}, "*");window.close();</scri';
+                closeScript += 'pt>';
+
+                res.send(closeScript);
+        });
+}

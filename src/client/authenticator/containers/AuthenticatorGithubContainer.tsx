@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import { AuthenticatorStore } from "../AuthenticatorStore"
 import AuthenticatorGithub from "./AuthenticatorGithub"
 import { IAuthenticatorGithubProps } from "./AuthenticatorGithub"
-
-function mapStateToProps(state : AuthenticatorStore) : IAuthenticatorGithubProps {
+import authenticate  from "../actions/AuthenticatedAction"
+function mapStateToProps(state : AuthenticatorStore) {
     return {
         githubClientId : state.authenticatorSettings ?
                             state.authenticatorSettings.githubClientId :
@@ -11,8 +11,10 @@ function mapStateToProps(state : AuthenticatorStore) : IAuthenticatorGithubProps
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
-    return {};
+function mapDispatchToProps(dispatch) {
+    return {
+       onAuthenticated: (email, token) : void => dispatch(authenticate(email, token)) 
+    };
 }
 
 const AuthenticatorGithubContainer = connect (

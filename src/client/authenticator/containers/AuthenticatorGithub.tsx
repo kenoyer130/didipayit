@@ -2,7 +2,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 export interface IAuthenticatorGithubProps {
-    githubClientId: string
+    githubClientId: string,
+    onAuthenticated: (token: string, email: string) => void;
 };
 
 interface IAuthenticatorGithubState {};
@@ -15,8 +16,17 @@ class AuthenticatorGithub extends React.Component<IAuthenticatorGithubProps, IAu
     }
 
     _onclick() {
+        
+        window.addEventListener("message", (msg) => {
+            if(!msg.data.action || msg.data.action !== 'github_authenticated') {
+                return;
+            }
+
+            this.props.onAuthenticated(msg.data.email, msg.data.access_token);        
+        }, false);
+        
         const URL = "https://github.com/login/oauth/authorize?scope=user:email&client_id=" + this.props.githubClientId;
-        window.open(URL, "_github", "hieght:150, width:400");        
+        window.open(URL, "_github", "height:150px, width:400px");
     }    
 
     public render() {
