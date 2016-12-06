@@ -10,6 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 import {exec} from './authenticator/actions/FetchRequestAction'
 import AuthenticatorContainer from "./authenticator/containers/AuthenticatorContainer"; 
 import createLogger = require("redux-logger");
+import {Router, Route, hashHistory} from 'react-router'
 
 import authenticationSettingsResponse from './authenticator/actions/AuthenticatorSettingsResponseAction'
 import AuthenticatorSettings from "./authenticator/types/AuthenticatorSettings"
@@ -20,9 +21,9 @@ const store = createStore( AuthenticatorReducer, applyMiddleware(thunkMiddleware
 
 ReactDOM.render (
     <Provider store={store}>
-        <AuthenticatorContainer >
-            <div>You are authenticated</div>
-        </AuthenticatorContainer>
+        <Router history={hashHistory}>
+            <Route path="/" component={AuthenticatorContainer} />
+        </Router>
     </Provider>,
     document.getElementById("root")
 );

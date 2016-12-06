@@ -59,6 +59,22 @@ app.get("/api/github_authentication_callback", function(req, res) {
     requestGithubToken(session_code, res);
 });
 
+app.get("/api/account/:email", function(req, res) {
+    var email = req.params.email;
+
+    db.collection(ACCOUNTS_COLLECTION).find({email: email}).toArray(function(err, docs) {
+        if(err) {
+            error(err.message);
+        } else {
+            if(docs.length === 0) {
+                res.status(200).json({});
+            } else {
+                res.status(200).json(docs[0]);
+            }
+        }
+    });    
+});
+
 function requestGithubToken(session_code, res) {
     var url = 'https://github.com/login/oauth/access_token';
     request.post({
