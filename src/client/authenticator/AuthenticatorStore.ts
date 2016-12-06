@@ -1,6 +1,7 @@
 import AuthenticatorSettings from "./types/AuthenticatorSettings"
 
 export interface AuthenticatorStore {
+    isLocal: boolean,
     hasAuthToken: boolean,
     authToken: string,
     authenticatorSettingsLoaded: boolean
@@ -10,6 +11,7 @@ export interface AuthenticatorStore {
 }
 
 export const DefaultState : AuthenticatorStore = {
+    isLocal: window.location.hostname === 'localhost',
     hasAuthToken: false,
     authToken: null,
     authenticatorSettingsLoaded: false,
