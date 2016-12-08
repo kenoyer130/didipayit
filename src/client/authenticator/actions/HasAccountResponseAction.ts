@@ -6,12 +6,12 @@ export interface IHasAccountActionResponse extends Redux.Action {
     accountExists: boolean
 }
 
-function authenticated(token : string, email: string, accountExists: boolean) : IHasAccountActionResponse {
+function authenticated(json, props) : IHasAccountActionResponse {
     return {
         type : HAS_ACCOUNT_ACTION_RESPONSE,
-        email: email,
-        token: token,
-        accountExists: accountExists
+        email: props.email,
+        token: props.token,
+        accountExists: json.length > 0
     }
 }
 

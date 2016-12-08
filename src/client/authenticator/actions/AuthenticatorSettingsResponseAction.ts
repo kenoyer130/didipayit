@@ -6,10 +6,10 @@ export interface IAuthenticatorSettingsResponseAction extends Redux.Action {
     authenticatorSettings : AuthenticatorSettings
 }
 
-function authenticationSettingsResponse(response :any) : IAuthenticatorSettingsResponseAction {
+function authenticationSettingsResponse(json :any) : IAuthenticatorSettingsResponseAction {
 
     const authenticatorSettings : AuthenticatorSettings =  {
-        githubClientId : response['github_client_id']
+        githubClientId : json['github_client_id']
     };
 
     return {
