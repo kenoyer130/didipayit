@@ -11,5 +11,4 @@ Bill tracker
 * check if family exists if attempting to join
 
 ### today
-* 409 error response
 * route to main page after account created 
