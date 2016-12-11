@@ -10,6 +10,5 @@ Bill tracker
 * check if family exists if attempting to join
 * add cookie/header authentication so no need to log in each time
 * break store/reducer into seperate stores
-* null check on family name is borked
 
 ### today

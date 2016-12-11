@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch: any) {
              dispatch(stateFormValueChanged("joinExistingFamily", value))
          },
          onSave: (email, familyName, joinExistingFamily) : void => {
-             if(familyName === null) {
+             if(familyName === undefined || familyName === null) {
                  dispatch(onViolation("Family Name is required!"))
              } else {
                  dispatch(createAccount(email,familyName, joinExistingFamily))
