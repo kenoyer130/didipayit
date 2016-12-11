@@ -1,4 +1,5 @@
 import AuthenticatorSettings from "./types/AuthenticatorSettings"
+import Account from "../models/Account"
 
 export interface AuthenticatorStore {
     isLocal: boolean,
@@ -7,11 +8,10 @@ export interface AuthenticatorStore {
     authenticatorSettingsLoaded: boolean
     authenticatorSettings?: AuthenticatorSettings,
     hasAccount: boolean,
-    accountEmail: string,
     joinExistingFamily: boolean,
-    familyName: string,
     valid: boolean,
-    violation?: string
+    violation?: string,
+    account: Account
 }
 
 export const DefaultState : AuthenticatorStore = {
@@ -21,9 +21,8 @@ export const DefaultState : AuthenticatorStore = {
     authenticatorSettingsLoaded: false,
     authenticatorSettings: null,
     hasAccount: false,
-    accountEmail: null,
     joinExistingFamily: false,
-    familyName: null,
     valid: true,
-    violation: null
+    violation: null,
+    account: null
 }

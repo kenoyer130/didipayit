@@ -18,6 +18,7 @@ function createAccount(accountEmail, familyName, joinExistingFamily) {
             joinExistingFamily: joinExistingFamily,
             accountEmail: accountEmail
         }).then(json => {
+            dispatch(onViolation(null));
             dispatch(getAction(familyName, accountEmail));
         }).catch((error) => {
 

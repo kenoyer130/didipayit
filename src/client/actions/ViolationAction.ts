@@ -10,7 +10,7 @@ function onViolation(violation) : IViolationAction {
     return {
         type : VIOLATION_ACTION,
         violation: violation,
-        valid: false
+        valid: violation === null || violation === ''
     }
 }
 
