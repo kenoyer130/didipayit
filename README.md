@@ -4,10 +4,10 @@ Bill tracker
 ## TODO
 
 ### backlog
+* use promises server side to handle callback hell
 * create main screen mock up
 * server database error flow
 * add concept of joining a family
-* check if family exists if attempting to join
 * add cookie/header authentication so no need to log in each time
 * break store/reducer into seperate stores
 
