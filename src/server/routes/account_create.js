@@ -12,7 +12,7 @@ module.exports = function (app, db) {
         var family = req.body.family;
 
         // check if account exists
-        itemExistsDb(db, "account", accountEmail, function(itemExists) {
+        itemExistsDb(db, "account", "email", accountEmail, function(itemExists) {
             if (itemExists) {
                 // if so return 409 error
                 res.status(409).send();
@@ -20,6 +20,7 @@ module.exports = function (app, db) {
                 // if not create account
                 accountCreateDb(db, accountEmail, family, function () {
                     // return 200 success
+                    res.write('{}');
                     res.status(200).send();
                 });
             }

@@ -11,9 +11,21 @@
  * @param {*} id 
  * @param {itemExistsCallback} callback
  */
-module.exports = function (db, collection, id, callback) {
+module.exports = function (db, collection, field, id, callback) {
 
-    db.collection(collection + "").find({ _id: id })
+    var filter = {}
+
+    if(field === 'email') {
+        filter = {
+            email : id
+        };
+    } else if (field === 'family') {
+        filter = {
+            family: id
+        }
+    }
+
+    db.collection(collection + "").find(filter)
         .toArray(function (err, docs) {
             if (err) {
                 callback.has_error = true;

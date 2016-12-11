@@ -14,7 +14,7 @@ function createAccount(accountEmail, familyName, joinExistingFamily) {
 
     return function (dispatch) {
         exec("api/account", 'POST', {
-            familyName: familyName,
+            family: familyName,
             joinExistingFamily: joinExistingFamily,
             accountEmail: accountEmail
         }).then(json => {

@@ -12,7 +12,7 @@
  * @param {createAccountCallback}
  */
 module.exports = function (db, email, family, callback) {
-    db.collection('account').insert({ _id: email, family: family }, function (err, docs) {
+    db.collection('account').insert({ email: email, family: family }, function (err, docs) {
         callback(err !== null);
     });
 }
