@@ -8,16 +8,16 @@ import createAccount from "./actions/CreateAccountAction"
 
 function mapStateToProps(state : AuthenticatorStore) {
     return {
-       email : state.accountEmail,
+       email : state.account != null ? state.account.email : null,
        joinExistingFamily : state.joinExistingFamily,
-       familyName: state.familyName
+       familyName: state.account != null ? state.account.family : null
     }
 }
 
 function mapDispatchToProps(dispatch: any) {
     return {
          onFamilyNameChange: (value) : void =>  {
-             dispatch(stateFormValueChanged("familyName", value))
+             dispatch(stateFormValueChanged("account.family", value))
          },
          onJoinFamilyChange: (value) : void =>  {
              dispatch(stateFormValueChanged("joinExistingFamily", value))
