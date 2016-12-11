@@ -12,9 +12,8 @@ import createLogger = require("redux-logger");
 import {Router, Route, hashHistory} from 'react-router'
 import RootContainer from './RootContainer'
 
-import authenticationSettingsResponse from './authenticator/actions/AuthenticatorSettingsResponseAction'
+import getAuthenticationSettings from './authenticator/actions/AuthenticatorSettingsGetAction'
 import AuthenticatorSettings from "./authenticator/types/AuthenticatorSettings"
-import {exec} from './actions/FetchRequestAction'
 
 let loggerMiddleware = createLogger()
 
@@ -27,4 +26,4 @@ ReactDOM.render (
     document.getElementById("root")
 );
 
-store.dispatch(exec("api/settings",authenticationSettingsResponse));
+store.dispatch(getAuthenticationSettings());
