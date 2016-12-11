@@ -13,4 +13,3 @@ Bill tracker
 * null check on family name is borked
 
 ### today
-* route to main page after account created 

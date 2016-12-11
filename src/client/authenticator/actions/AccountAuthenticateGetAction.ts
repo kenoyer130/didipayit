@@ -1,11 +1,13 @@
 export const ACCOUNT_AUTHENTICATE_GET_ACTION = "ACCOUNT_AUTHENTICATE_GET_ACTION";
 
+import Account from "../../models/Account"
+
 import { exec } from "../../actions/FetchRequestAction"
 
 export interface IAccountAuthenticationGetAction extends Redux.Action {
-    email: string,
     token: string,
-    accountExists: boolean
+    hasAccount: boolean,
+    account: Account
 }
 
 function authenticate(token: string, email: string) {
@@ -13,19 +15,21 @@ function authenticate(token: string, email: string) {
     return (dispatch) => {
         exec("api/account/" + email).then(json => {
 
-            const accountExists = json.accountExists;
+            const hasAccount = json.email ? true : false; 
 
-            dispatch(getAction(email, token, accountExists));
+            const account : Account = hasAccount ? json : { email: email}; 
+
+            dispatch(getAction(token, account, hasAccount));
         });
     }
 }
 
-function getAction(email, token, accountExists) {
+function getAction(token: string, account: Account, hasAccount: boolean) : IAccountAuthenticationGetAction {
     return {
         type: ACCOUNT_AUTHENTICATE_GET_ACTION,
-        email: email,
         token: token,
-        accountExists: accountExists
+        hasAccount : hasAccount,
+        account : account
     }
 }
 
