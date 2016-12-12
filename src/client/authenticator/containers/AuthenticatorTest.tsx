@@ -1,21 +1,25 @@
 import * as React from "react";
+import { exec } from "../../actions/FetchRequestAction"
 
 export interface IAuthenticatorTest {
     onAuthenticated: (token: string, email: string) => void;
 };
 
-interface IAuthenticatorTestState {};
+interface IAuthenticatorTestState { };
 
 class AuthenticatorTest extends React.Component<IAuthenticatorTest, IAuthenticatorTestState> {
 
     _onclick = () => {
-        this.props.onAuthenticated(Math.random() + "", 'test@test.com');        
-    }    
+        exec("api/public/local_authentication")
+        .then(json => {
+              this.props.onAuthenticated(json.token, 'test@test.com');
+        });
+    }
 
     public render() {
 
         return <a href="#" onClick={this._onclick} >
-                Test Authenticator!
+            Test Authenticator!
                </a>
     }
 }

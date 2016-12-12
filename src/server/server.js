@@ -38,8 +38,9 @@ function error(msg) {
 }
 
 function setupRoutes(app, db) {
-    require('./routes/account_create')(app, db);
-    require('./routes/settings_get')(app, db);
-    require('./routes/github_authentication_callback')(app, db);
+    require('./routes/public/settings_get')(app, db);
+    require('./routes/public/github_authentication_callback')(app, db);
+    require('./routes/public/local_authentication')(app, db);
     require('./routes/account_get')(app, db);
+    require('./routes/account_create')(app, db);
 }

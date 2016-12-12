@@ -2,6 +2,8 @@ export const AUTHENTICATOR_SETTINGS_GET_ACTION = "AUTHENTICATOR_SETTINGS_GET_ACT
 
 import AuthenticatorSettings from "../types/AuthenticatorSettings"
 import { exec } from "../../actions/FetchRequestAction"
+import { authenticateLocally } from "../actions/LocalAuthenticationAction"
+import * as Cookies from 'js-cookie'
 
 export interface IAuthenticatorSettingsGetAction extends Redux.Action {
     authenticatorSettings: AuthenticatorSettings
@@ -10,7 +12,18 @@ export interface IAuthenticatorSettingsGetAction extends Redux.Action {
 function getAuthenticationSettings() {
 
     return function (dispatch) {
-        exec("api/settings").then(json => {
+
+        // do we have the proper cookies?
+        const authToken = Cookies.get("authToken");
+        const emailLocal = Cookies.get("email");
+        const familyLocal = Cookies.get("family");
+
+        if(authToken && emailLocal && familyLocal) {
+            dispatch(authenticateLocally(authToken, emailLocal, familyLocal));
+            return;
+        }
+
+        exec("api/public/settings").then(json => {
 
             const authenticatorSettings: AuthenticatorSettings = {
                 githubClientId: json['github_client_id']

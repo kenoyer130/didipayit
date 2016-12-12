@@ -8,7 +8,7 @@ Bill tracker
 * create main screen mock up
 * server database error flow
 * add concept of joining a family
-* add cookie/header authentication so no need to log in each time
 * break store/reducer into seperate stores
+* add server side header auth check for non public calls
 
 ### today

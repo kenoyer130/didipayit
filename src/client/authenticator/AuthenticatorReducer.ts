@@ -6,6 +6,8 @@ import { ACCOUNT_AUTHENTICATE_GET_ACTION, IAccountAuthenticationGetAction } from
 import { STATE_FORM_VALUE_CHANGED, IStateFormValuedChangeAction } from '../actions/StateFormValuedChangeAction'
 import { VIOLATION_ACTION, IViolationAction } from '../actions/ViolationAction'
 import { CREATE_ACCOUNT_ACTION, ICreateAccountAction } from '../newAccount/actions/CreateAccountAction'
+import { LOCAL_AUTHENTICATION_ACTION, ILocalAuthenticationAction } from './actions/LocalAuthenticationAction'
+import { AUTHENTICATION_LOCAL_SAVE_ACTION, ISaveAuthenticationLocal } from './actions/AuthenticationLocalSaveAction'
 
 function AuthenticatorReducer(state: AuthenticatorStore = DefaultState, action: Redux.Action): AuthenticatorStore {
     switch (action.type) {
@@ -15,6 +17,28 @@ function AuthenticatorReducer(state: AuthenticatorStore = DefaultState, action: 
             return Object.assign({}, state, {
                 authenticatorSettingsLoaded: true,
                 authenticatorSettings: settingsAction.authenticatorSettings
+            });
+
+        case AUTHENTICATION_LOCAL_SAVE_ACTION:
+            const saveLocalAuthenticationAction = action as ISaveAuthenticationLocal;
+
+            return Object.assign({}, state, {
+                hasAuthToken: saveLocalAuthenticationAction.hasAuthToken,
+                hasAccount: saveLocalAuthenticationAction.hasAccount,
+                account: saveLocalAuthenticationAction.account,
+                authToken: saveLocalAuthenticationAction.token,
+                authenticatorSettingsLoaded: true
+            });
+
+        case LOCAL_AUTHENTICATION_ACTION:
+            const localAuthenticationAction = action as ILocalAuthenticationAction;
+
+            return Object.assign({}, state, {
+                hasAuthToken: localAuthenticationAction.hasAuthToken,
+                hasAccount: localAuthenticationAction.hasAccount,
+                account: localAuthenticationAction.account,
+                authToken: localAuthenticationAction.token,
+                authenticatorSettingsLoaded: true
             });
 
         case ACCOUNT_AUTHENTICATE_GET_ACTION:

@@ -37,19 +37,21 @@ class Root extends React.Component<IRootProps, IRootState> {
         const currentPath = hashHistory.getCurrentLocation().pathname;
 
         // if we have no auth token reroute to the login page
-        if (!props.hasAuthToken && currentPath !== 'login') {
-            hashHistory.push("login");
+        if (!props.hasAuthToken && currentPath !== '/login') {
+            hashHistory.push("/login");
             return;
         }
 
         // if we have a token but no account reroute to new account sign up
-        if (!props.hasAccount && currentPath !== 'account/new') {
-            hashHistory.push("account/new");
+        if (!props.hasAccount && currentPath !== '/account/new') {
+            hashHistory.push("/account/new");
             return;
         }
 
         // if we have a token and an account on root or new account page reroute to main
-        if (currentPath === "/" || currentPath === '/account/new') {
+        if (currentPath === "/"
+            || currentPath === '/account/new'
+            || currentPath === '/login') {
             hashHistory.push("/main");
         }
 

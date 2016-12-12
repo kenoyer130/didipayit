@@ -1,6 +1,7 @@
 export const ACCOUNT_AUTHENTICATE_GET_ACTION = "ACCOUNT_AUTHENTICATE_GET_ACTION";
 
 import Account from "../../models/Account"
+import saveAuthenticationLocal from "./AuthenticationLocalSaveAction";
 
 import { exec } from "../../actions/FetchRequestAction"
 
@@ -15,21 +16,25 @@ function authenticate(token: string, email: string) {
     return (dispatch) => {
         exec("api/account/" + email).then(json => {
 
-            const hasAccount = json.email ? true : false; 
+            const hasAccount = json.email ? true : false;
 
-            const account : Account = hasAccount ? json : { email: email}; 
+            const account: Account = hasAccount ? json : { email: email };
+
+            if (hasAccount) {
+                dispatch(saveAuthenticationLocal(token, account.email, account.family));
+            }
 
             dispatch(getAction(token, account, hasAccount));
         });
     }
 }
 
-function getAction(token: string, account: Account, hasAccount: boolean) : IAccountAuthenticationGetAction {
+function getAction(token: string, account: Account, hasAccount: boolean): IAccountAuthenticationGetAction {
     return {
         type: ACCOUNT_AUTHENTICATE_GET_ACTION,
         token: token,
-        hasAccount : hasAccount,
-        account : account
+        hasAccount: hasAccount,
+        account: account
     }
 }
 
