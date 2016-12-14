@@ -12,3 +12,4 @@ Bill tracker
 * add server side header auth check for non public calls
 
 ### today
+* add styles and components

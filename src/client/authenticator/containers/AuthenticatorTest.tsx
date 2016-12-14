@@ -11,16 +11,20 @@ class AuthenticatorTest extends React.Component<IAuthenticatorTest, IAuthenticat
 
     _onclick = () => {
         exec("api/public/local_authentication")
-        .then(json => {
-              this.props.onAuthenticated(json.token, 'test@test.com');
-        });
+            .then(json => {
+                this.props.onAuthenticated(json.token, 'test@test.com');
+            });
     }
 
     public render() {
 
-        return <a href="#" onClick={this._onclick} >
-            Test Authenticator!
+        return (
+            <div className="mdl-list__item">
+                <a href="#" onClick={this._onclick} >
+                    Test Authenticator!
                </a>
+            </div>
+        );
     }
 }
 

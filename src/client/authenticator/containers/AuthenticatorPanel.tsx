@@ -8,25 +8,21 @@ interface IAuthenticatorPanelProps {
     onAuthenticated: (token: string, email: string) => void
 };
 
-interface IAuthenticatorPanelState {};
+interface IAuthenticatorPanelState { };
 
 class AuthenticatorPanel extends React.Component<IAuthenticatorPanelProps, IAuthenticatorPanelState> {
     public render() {
-        return <div>
-        <div>Select your authentiction method!</div>
-            <div>
-                { this.props.isLocal ? 
-                    <AuthenticatorTest 
-                        onAuthenticated = { this.props.onAuthenticated } /> 
-                        : ''}
-            </div>
-            <div>
-                <AuthenticatorGithub 
-                    githubClientId = {this.props.githubClientId}
-                    onAuthenticated = { this.props.onAuthenticated } />
-            </div>
-        </div>;
-    } 
+        return (
+            <div className='mdl-list'>
+                {this.props.isLocal ?
+                    <AuthenticatorTest
+                        onAuthenticated={this.props.onAuthenticated} />
+                    : ''}
+                <AuthenticatorGithub
+                    githubClientId={this.props.githubClientId}
+                    onAuthenticated={this.props.onAuthenticated} />
+            </div>);
+    }
 }
 
 export default AuthenticatorPanel;
