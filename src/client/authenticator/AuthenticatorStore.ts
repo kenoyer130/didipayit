@@ -7,11 +7,7 @@ export interface AuthenticatorStore {
     authToken: string,
     authenticatorSettingsLoaded: boolean
     authenticatorSettings?: AuthenticatorSettings,
-    hasAccount: boolean,
-    joinExistingFamily: boolean,
-    valid: boolean,
-    violation?: string,
-    account: Account
+    hasAccount: boolean
 }
 
 export const DefaultState : AuthenticatorStore = {
@@ -21,8 +17,4 @@ export const DefaultState : AuthenticatorStore = {
     authenticatorSettingsLoaded: false,
     authenticatorSettings: null,
     hasAccount: false,
-    joinExistingFamily: false,
-    valid: true,
-    violation: null,
-    account: null
 }

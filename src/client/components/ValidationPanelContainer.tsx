@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
-import { AuthenticatorStore } from "../authenticator/AuthenticatorStore"
+import { Store } from "../Store"
 import ValidationPanel from "./ValidationPanel"
 
-function mapStateToProps(state : AuthenticatorStore) {
+function mapStateToProps(state : Store) {
     return {
-       violation: state.violation
+       violation: state.newAccount.violation
     }
 }
 

@@ -1,9 +1,12 @@
 import { connect } from "react-redux";
-import { AuthenticatorStore } from "../authenticator/AuthenticatorStore"
+import { Store } from "../Store"
 import Main from "./Main"
 
-function mapStateToProps(state: AuthenticatorStore) {
+function mapStateToProps(state: Store) {
     return {
+        selectedDate: state.main.selectedDate,
+        selectedView: state.main.selectedView,
+        billInstances: state.main.billInstances
     }
 }
 

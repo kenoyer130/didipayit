@@ -1,13 +1,13 @@
 import { connect } from "react-redux";
-import { AuthenticatorStore } from "../AuthenticatorStore"
+import { Store } from "../../Store"
 import AuthenticatorPanel from "./AuthenticatorPanel"
 import { exec } from "../../actions/FetchRequestAction"
 import authenticate from "../actions/AccountAuthenticateGetAction"
 
-function mapStateToProps(state: AuthenticatorStore) {
+function mapStateToProps(state: Store) {
     return {
-        authenticatorSettingsLoaded: state.authenticatorSettingsLoaded,
-        isLocal: state.isLocal
+        authenticatorSettingsLoaded: state.authenticator.authenticatorSettingsLoaded,
+        isLocal: state.authenticator.isLocal
     }
 }
 

@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
-import { AuthenticatorStore } from "../authenticator/AuthenticatorStore"
+import { Store } from "../Store"
 import stateFormValueChanged  from "../actions/StateFormValuedChangeAction"
 import onViolation from "../actions/ViolationAction" 
 import AccountSignup from "./AccountSignup"
 import {IAccountSignupProps, IAccountSignupState} from "./AccountSignup"
 import createAccount from "./actions/CreateAccountAction"
 
-function mapStateToProps(state : AuthenticatorStore) {
+function mapStateToProps(state : Store) {
     return {
-       email : state.account != null ? state.account.email : null,
-       joinExistingFamily : state.joinExistingFamily,
-       familyName: state.account != null ? state.account.family : null
+       email : state.newAccount.account != null ? state.newAccount.account.email : null,
+       joinExistingFamily : state.newAccount.joinExistingFamily,
+       familyName: state.newAccount.account != null ? state.newAccount.account.family : null
     }
 }
 

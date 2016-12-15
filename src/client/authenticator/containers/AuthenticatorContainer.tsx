@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
-import { AuthenticatorStore } from "../AuthenticatorStore"
+import { Store } from "../../Store"
 import Authenticator from "./Authenticator"
 import {IAuthenticatorProps} from "./Authenticator"
 
-function mapStateToProps(state : AuthenticatorStore) : IAuthenticatorProps {
+function mapStateToProps(state : Store) : IAuthenticatorProps {
     return {
-       hasAuthToken: state.hasAuthToken,
-       authenticatorSettingsLoaded : state.authenticatorSettingsLoaded
+       hasAuthToken: state.authenticator.hasAuthToken,
+       authenticatorSettingsLoaded : state.authenticator.authenticatorSettingsLoaded
     }
 }
 
